@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import{ MouseEventHandler} from "react";
 
 interface IButton {
     name? : string,
-    event: any
+    event: MouseEventHandler
 }
 
 

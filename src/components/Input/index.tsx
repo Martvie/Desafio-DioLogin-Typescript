@@ -3,6 +3,8 @@ import styled from "styled-components";
 interface IInput {
     label: string;
     descritor?: string;
+    value?: string;
+    onChange?:any;
 }
 
 const InputContainer = styled.input`
@@ -18,6 +20,6 @@ const InputContainer = styled.input`
     width: 90%;
 `;
 
-export const Input: React.FC<IInput> = ({ label, descritor }: IInput) => {
-    return <InputContainer id={label} type={label} placeholder={descritor} />;
+export const Input: React.FC<IInput> = ({ label, descritor, value, onChange }: IInput) => {
+    return <InputContainer id={label} type={label} placeholder={descritor} value={value} onChange={onChange}/>;
 };
