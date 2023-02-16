@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
+import { useState } from "react";
 
 import styled from "styled-components";
 
@@ -33,33 +32,14 @@ const FormContainer = styled.form`
     justify-content: space-evenly;
 `;
 
-interface IUserData {
-    name: string,
-    email: string,
-    password: string
-}
+
 
 export const Form = () => {
     const [email, setEmaiil] = useState<string>("");
-    const [userData, setUserData] = useState<null| IUserData>()
-
-    useEffect(() => {
-        const getData = async () => {
-            const data: any | IUserData = await api;
-            setUserData(data)
-        };
-
-        getData();
-    });
-
+   
     return (
         <InputWrapper>
             <Title>Faça o login</Title>
-
-            {userData === null  || userData === undefined &&
-             <h1>Loading...</h1>
-            }
-
 
             <FormContainer>
                 <Input
