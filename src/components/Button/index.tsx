@@ -2,13 +2,13 @@ import styled from "styled-components";
 import{ MouseEventHandler} from "react";
 
 interface IButton {
-    name? : string,
-    event: MouseEventHandler
+    name : string,
+    event?: MouseEventHandler,
 }
 
 
 const ButtonContainer = styled.button`
-    width: 90%;
+    width: 8rem;
     height: 2rem;
 
     border-radius: 0.5rem;
@@ -27,7 +27,7 @@ const ButtonContainer = styled.button`
 
 export const Button : React.FC<IButton> = ({name, event}: IButton) =>{
     return(
-        <ButtonContainer onClick={event}>
+        <ButtonContainer onClick={event} >
             {name}
         </ButtonContainer>
     )

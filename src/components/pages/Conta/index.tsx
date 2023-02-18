@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -8,6 +8,7 @@ import { CardInfo } from "../../CardInfo";
 import { api } from "../../../services/api";
 
 import { Header } from "../../Header";
+import { AppContext } from "../../../contexts/AppContext";
 
 
 const InfoWrapper = styled.div`
@@ -32,8 +33,11 @@ export const Conta: React.FC = () => {
 
     const [userData, setUserData] = useState<null| IUserData>()
     const {id} = useParams();
+    const {isLogged} = useContext(AppContext);
     const actualData = new Date();
     const navigate = useNavigate();
+
+    !isLogged && navigate('/');
 
     useEffect(() => {
         const getData = async () => {
@@ -43,6 +47,7 @@ export const Conta: React.FC = () => {
 
         getData();
     });
+
 
     if(userData && id !== userData.id){
         navigate('/')

@@ -1,6 +1,21 @@
 import { login } from "./login";
 // import * as moackApi  from "./api";
 
+// const mockSetIsLogged = jest.fn();
+// const mockNavigate = jest.fn();
+
+// jest.mock('react', () =>({
+//     ...jest.requireActual('react'),
+//     useContext: () =>({
+//         setIsLogged: mockSetIsLogged
+//     })
+// }))
+
+// jest.mock('react-router-dom', () =>({
+//     ...jest.requireActual('react-router-dom') as any,
+//     useNavigate: () => mockNavigate
+// }))
+
 describe("Login", () => {
     const mockAlert = jest.fn();
     const mockEmail = 'marcus@dio.bank';
@@ -8,20 +23,14 @@ describe("Login", () => {
 
     // moackApi.api = jest.fn().mockImplementation();
 
-    it("Deve exibir um alert de boas vindas caso o email seja válido", async () => {
-        await login(mockEmail);
-        expect(mockAlert).toBeCalled();
-        expect(mockAlert).toHaveBeenCalledWith(`Bem vinde ${mockEmail}! Você será redirecionado em segundos!`);
-    });
-
-    it("Não deve chamar disparar a frase sem o nome do usuário", async () => {
-        await login(mockEmail);
-        expect(mockAlert).not.toHaveBeenCalledWith("Bem vinde!");
+    it("Deve redirecionar o usuário caso o email seja válido", async () => {
+        const response = await login(mockEmail);
+        expect(response).toBeTruthy();
     });
 
     it("Deve exibir um erro caso o email seja inválido", async () =>{ 
-        await login('email@invalido.com')
 
-        expect(mockAlert).toBeCalledWith('Email inválido')
+        const response = await login('email@invalido.com');
+        expect(response).toBeFalsy();    
     })
 });

@@ -14,9 +14,12 @@ export const LayoutWrapper = styled.div`
 
 export const Layout = () => {
     return (
+        <>
+        <Header />
         <LayoutWrapper>
-            <Header />
+            
             <Form/>
         </LayoutWrapper>
+        </>
     );
 };

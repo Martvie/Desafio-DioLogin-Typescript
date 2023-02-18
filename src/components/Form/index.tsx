@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
+import { AppContext } from "../../contexts/AppContext";
 
 import { login } from "../../services/login";
 import { Button } from "../Button";
@@ -36,6 +38,19 @@ const FormContainer = styled.form`
 
 export const Form = () => {
     const [email, setEmaiil] = useState<string>("");
+    const navigate = useNavigate();
+    const {setIsLogged}  = useContext(AppContext)
+
+    const validadeUser = async (email: string) =>{
+        const loggedIn = await login(email);
+
+        if(!loggedIn){
+            return alert('Email Inválido')
+        }
+
+        setIsLogged(true);
+        navigate('/conta/1')
+    }
    
     return (
         <InputWrapper>
@@ -54,7 +69,7 @@ export const Form = () => {
                 />
                 <Input label={"password"} descritor={"Senha"} />
 
-                <Button name={"Logar"} event={() => login(email)} />
+                <Button name={"Logar"} event={() =>validadeUser(email)} />
             </FormContainer>
         </InputWrapper>
     );
