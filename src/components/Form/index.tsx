@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
@@ -35,25 +35,24 @@ const FormContainer = styled.form`
     justify-content: space-evenly;
 `;
 
-
-
 export const Form = () => {
     const [email, setEmaiil] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
     const navigate = useNavigate();
-    const {setIsLogged}  = useContext(AppContext)
+    const { setIsLogged } = useContext(AppContext);
 
-    const validadeUser = async (email: string) =>{
-        const loggedIn = await login(email);
+    const validadeUser = async (email: string, password: string) => {
+        const loggedIn = await login(email, password);
 
-        if(!loggedIn){
-            return alert('Email Inválido')
+        if (!loggedIn) {
+            return alert("Email ou senha inválidos");
         }
 
         setIsLogged(true);
-        changeLocalStorage({login: true});
-        navigate('/conta/1');
-    }
-   
+        changeLocalStorage({ login: true });
+        navigate("/conta/1");
+    };
+
     return (
         <InputWrapper>
             <Title>Faça o login</Title>
@@ -69,9 +68,21 @@ export const Form = () => {
                         setEmaiil(event.target.value);
                     }}
                 />
-                <Input label={"password"} descritor={"Senha"} />
+                <Input
+                    label={"password"}
+                    descritor={"Senha"}
+                    value={password}
+                    onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                    ): void => {
+                        setPassword(event.target.value);
+                    }}
+                />
 
-                <Button name={"Logar"} event={() =>validadeUser(email)} />
+                <Button
+                    name={"Logar"}
+                    event={() => validadeUser(email, password)}
+                />
             </FormContainer>
         </InputWrapper>
     );

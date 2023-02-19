@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 
 import { CardInfo } from "../../CardInfo";
@@ -21,6 +21,7 @@ const InfoWrapper = styled.div`
 
     height: 50vh;
 `;
+
 interface IUserData {
     name: string,
     email: string,
@@ -59,9 +60,12 @@ export const Conta: React.FC = () => {
             <InfoWrapper>
         {userData === null || userData === undefined ? <h1>Carregando!</h1>:
         <>
+        <Link to={`/user/${userData?.id}`} >
         <CardInfo 
         mainText={`Bem vindo ${userData?.name}!`}
-        text={`${actualData.getDay()}/${actualData.getMonth()}//${actualData.getFullYear()}  ${actualData.getHours()}:${actualData.getMinutes()}`}/>
+        text={`${actualData.getDay()}/${actualData.getMonth()}//${actualData.getFullYear()}  ${actualData.getHours()}:${actualData.getMinutes()}`}
+        />
+        </Link>
         <CardInfo mainText="Saldo" text={`R$ ${userData.balance}`}/>
         </>
         }    

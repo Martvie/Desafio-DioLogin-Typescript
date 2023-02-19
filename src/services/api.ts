@@ -1,6 +1,6 @@
 const conta: object = {
     email: "marcus@dio.bank",
-    password: 1234,
+    password: '1234',
     name : "Marcus",
     balance: 1500.00,
     id: "1"
