@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AppContext } from "../../contexts/AppContext";
+import { changeLocalStorage } from "../../services/storage";
 import { Button } from "../Button";
 
 const HeaderContainer = styled.header`
@@ -29,6 +30,7 @@ export const Header = () => {
 
     const logout = () => {
         navigate("/");
+        changeLocalStorage({login: false});
         setIsLogged(false);
     };
 

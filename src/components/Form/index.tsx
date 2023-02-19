@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { AppContext } from "../../contexts/AppContext";
 
 import { login } from "../../services/login";
+import { changeLocalStorage } from "../../services/storage";
 import { Button } from "../Button";
 import { Input } from "../Input";
 
@@ -49,7 +50,8 @@ export const Form = () => {
         }
 
         setIsLogged(true);
-        navigate('/conta/1')
+        changeLocalStorage({login: true});
+        navigate('/conta/1');
     }
    
     return (

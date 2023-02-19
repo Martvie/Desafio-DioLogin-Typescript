@@ -4,10 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 
 import { AppProvider } from "./contexts/AppContext";
 import { MaiRoutes } from "./routes";
+import { createLocalStorage, getAllLocalStorage } from "./services/storage";
 
 
 
 function App() {
+    
+    !getAllLocalStorage && createLocalStorage();
+
     return (
         <div className="App">
             <Global/>
@@ -23,4 +27,3 @@ function App() {
 }
 
 export default App;
-//TODO Continuar de 07min
